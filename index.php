@@ -45,14 +45,14 @@ $ads = [
 ];
 
 function shows_cost($number) {
-	$num = ceil($number);
+    $number = ceil($number);
 
-	if ($num >= 1000) {
-      $num = number_format($num, 0, '.', ' ');
+    if ($number >= 1000) {
+        $number = number_format($number, 0, '.', ' ');
     }
 
-  	return $num . ' ₽';
-};
+  	return $number . ' ₽';
+}
 
 ?>
 <!DOCTYPE html>
@@ -91,10 +91,10 @@ function shows_cost($number) {
             <?php else: ?>
                 <ul class="user-menu__list">
                     <li class="user-menu__item">
-                    <a href="#">Регистрация</a>
+                        <a href="#">Регистрация</a>
                     </li>
                     <li class="user-menu__item">
-                    <a href="#">Вход</a>
+                        <a href="#">Вход</a>
                     </li>
                 </ul>
             <?php endif; ?>
