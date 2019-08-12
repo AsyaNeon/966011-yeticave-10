@@ -43,6 +43,17 @@ $ads = [
         'image' => 'img/lot-6.jpg'
     ]
 ];
+
+function shows_cost($number) {
+    $number = ceil($number);
+
+    if ($number >= 1000) {
+        $number = number_format($number, 0, '.', ' ');
+    }
+
+  	return $number . ' ₽';
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -80,10 +91,10 @@ $ads = [
             <?php else: ?>
                 <ul class="user-menu__list">
                     <li class="user-menu__item">
-                    <a href="#">Регистрация</a>
+                        <a href="#">Регистрация</a>
                     </li>
                     <li class="user-menu__item">
-                    <a href="#">Вход</a>
+                        <a href="#">Вход</a>
                     </li>
                 </ul>
             <?php endif; ?>
@@ -124,7 +135,7 @@ $ads = [
                         <div class="lot__state">
                             <div class="lot__rate">
                                 <span class="lot__amount">Стартовая цена</span>
-                                <span class="lot__cost"><?=$value['price']?><b class="rub">р</b></span>
+                                <span class="lot__cost"><?=shows_cost($value['price'])?></span>
                             </div>
                             <div class="lot__timer timer">
                                 12:23
