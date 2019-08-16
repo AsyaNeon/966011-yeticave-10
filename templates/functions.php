@@ -16,3 +16,19 @@ function include_template($name, $data) {
 
     return $result;
 }
+
+function shows_cost($number) {
+    $number = ceil($number);
+
+    if ($number >= 1000) {
+        $number = number_format($number, 0, '.', ' ');
+    }
+
+    return $number . ' ₽';
+}
+
+function esc($str) {
+    $text = htmlspecialchars($str);
+
+    return $text;
+}

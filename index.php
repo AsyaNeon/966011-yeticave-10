@@ -3,22 +3,6 @@
 require_once('templates/functions.php');
 require_once('templates/data.php');
 
-function shows_cost($number) {
-    $number = ceil($number);
-
-    if ($number >= 1000) {
-        $number = number_format($number, 0, '.', ' ');
-    }
-
-  	return $number . ' ₽';
-}
-
-function esc($str) {
-    $text = htmlspecialchars($str);
-
-    return $text;
-}
-
 $page_content = include_template('main.php', [
         'product_category' => $product_category,
         'ads' => $ads
