@@ -36,13 +36,13 @@
                             <span class="lot__cost"><?= shows_cost(esc($value['price'])) ?></span>
                         </div>
 
-                        <?php if (get_time_range($value['end_date_auction'])[0] === "00"): ?>
+                        <?php if (get_time_range($value['date_end'])[0] === "00"): ?>
                             <div class="lot__timer timer timer--finishing">
-                                <?= get_time_range($value['end_date_auction'])[0] . ':' . get_time_range($value['end_date_auction'])[1] ?>
+                                <?= get_time_range($value['date_end'])[0] . ':' . get_time_range($value['date_end'])[1] ?>
                             </div>
                         <?php else: ?>
                             <div class="lot__timer timer">
-                                <?= get_time_range($value['end_date_auction'])[0] . ':' . get_time_range($value['end_date_auction'])[1] ?>
+                                <?= get_time_range($value['date_end'])[0] . ':' . get_time_range($value['date_end'])[1] ?>
                             </div>
                         <?php endif; ?>
 

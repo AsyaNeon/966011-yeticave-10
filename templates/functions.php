@@ -33,14 +33,12 @@ function esc($str) {
     return $text;
 }
 
-date_default_timezone_set("Europe/Moscow");
-
 function get_time_range($date) {
     $end_ts = strtotime($date);
-    $ts_diff = $end_ts - time();
+    $diff_ts = $end_ts - time();
 
-    $hours = floor($ts_diff / 3600);
-    $minutes = floor(($ts_diff % 3600) / 60);
+    $hours = floor($diff_ts / 3600);
+    $minutes = floor(($diff_ts % 3600) / 60);
 
     $time = [$hours, $minutes];
 
