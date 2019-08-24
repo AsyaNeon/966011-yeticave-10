@@ -1,45 +1,45 @@
 CREATE TABLE categories
 (
-    id_categories INT AUTO_INCREMENT PRIMARY KEY,
-    title         CHAR,
-    value         CHAR UNIQUE
+    id    INT(11) AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(255) UNIQUE COMMENT 'название категории',
+    value VARCHAR(255) COMMENT 'Символьный код нужен, чтобы назначить правильный класс в меню категорий'
 );
 
 CREATE TABLE lot
 (
-    id_lot          INT AUTO_INCREMENT PRIMARY KEY,
-    date_creation   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    title           CHAR      NOT NULL,
-    description     TEXT,
-    image           CHAR UNIQUE,
-    initial_cost    INT,
-    date_completion TIMESTAMP NOT NULL,
-    step_rate       INT,
-    author          CHAR,
-    winner          CHAR,
-    category        CHAR
+    id              INT(11) AUTO_INCREMENT PRIMARY KEY,
+    date_create     TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'дата и время, создания лота',
+    title           VARCHAR(255) NOT NULL COMMENT 'название: задается пользователем',
+    description     TEXT(1000) COMMENT 'описание: задается пользователем',
+    image           VARCHAR(255) UNIQUE COMMENT 'изображение: ссылка на файл изображения',
+    initial_cost    INT(10) COMMENT 'начальная цена',
+    date_completion TIMESTAMP    NOT NULL COMMENT 'дата завершения',
+    step_rate       INT(10) COMMENT 'шаг ставки',
+    author_id       INT(11) COMMENT 'автор: пользователь, создавший лот - id.user',
+    winner_id       INT(11) COMMENT 'победитель: пользователь, выигравший лот - id.user',
+    category_id     INT(11) COMMENT 'категория объявления - id.categories'
 );
 
 CREATE TABLE rate
 (
-    id_rate       INT AUTO_INCREMENT PRIMARY KEY,
-    date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    rate          INT,
-    author        CHAR,
-    lot           CHAR
+    id          INT(11) AUTO_INCREMENT PRIMARY KEY,
+    date_create TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'дата и время размещения ставки',
+    rate        INT(10) COMMENT 'сумма: цена, по которой пользователь готов приобрести лот',
+    author_id   INT(11) COMMENT 'пользователь - id.user',
+    lot_id      INT(11) COMMENT 'лот - id.lot'
 );
 
 CREATE TABLE user
 (
-    id_user           INT AUTO_INCREMENT PRIMARY KEY,
-    date_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    email             CHAR NOT NULL UNIQUE,
-    name              CHAR NOT NULL UNIQUE,
-    password          CHAR NOT NULL UNIQUE,
-    avatar            CHAR,
-    contacts          CHAR UNIQUE,
-    created_lots      CHAR,
-    rates             CHAR
+    id                INT(11) AUTO_INCREMENT PRIMARY KEY,
+    date_registration TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT 'дата и время регистрации пользователя',
+    email             VARCHAR(255) NOT NULL UNIQUE COMMENT 'email',
+    name              VARCHAR(255) NOT NULL UNIQUE COMMENT 'имя',
+    password          VARCHAR(255) NOT NULL COMMENT 'пароль',
+    avatar            VARCHAR(255) COMMENT 'аватар: ссылка на загруженный аватар пользователя',
+    contacts          VARCHAR(255) UNIQUE COMMENT 'контакты',
+    created_lots_id   INT(11) COMMENT 'лоты созданные пользователем - id.lot',
+    rates_id          INT(11) COMMENT 'ставки созданные пользователем - id.rate'
 );
 
 CREATE INDEX lots ON lot (title);
