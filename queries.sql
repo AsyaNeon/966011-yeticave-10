@@ -131,7 +131,8 @@ SELECT l.title, r.date_create, u.name
 FROM rate r
 INNER JOIN lot l ON r.lot_id = l.id
 INNER JOIN users u ON r.author_id = u.id
-WHERE l.id = 1;
+WHERE l.id = 1
+ORDER BY r.date_create DESC;
 
 
 
