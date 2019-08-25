@@ -40,32 +40,14 @@ CREATE TABLE users
     name              VARCHAR(255) NOT NULL UNIQUE COMMENT 'имя',
     password          VARCHAR(255) NOT NULL COMMENT 'пароль',
     avatar            VARCHAR(255) COMMENT 'аватар: ссылка на загруженный аватар пользователя',
-    contacts          VARCHAR(255) UNIQUE COMMENT 'контакты',
-    created_lots_id   INT(11) COMMENT 'лоты созданные пользователем - id.lot',
-    rates_id          INT(11) COMMENT 'ставки созданные пользователем - id.rate'
+    contacts          VARCHAR(255) UNIQUE COMMENT 'контакты'
 )
     COMMENT ='пользователи';
 
-CREATE TABLE all_lots_user
-(
-    id      INT(11) AUTO_INCREMENT PRIMARY KEY,
-    lot_id  INT(11) NOT NULL COMMENT 'id лота',
-    user_id INT(11) NOT NULL COMMENT 'id пользоателя создавшего лот'
-) COMMENT ='для связи нескольких лотов с одним пользователем';
-
-CREATE TABLE all_rates_user
-(
-    id       INT(11) AUTO_INCREMENT PRIMARY KEY,
-    rates_id INT(11) NOT NULL COMMENT 'id ставки',
-    user_id  INT(11) NOT NULL COMMENT 'id пользоателя создавшего ставку'
-) COMMENT ='для связи нескольких ставок с одним пользователем';
-
-CREATE INDEX lot_1 ON lot (title);
-CREATE INDEX lot_2 ON lot (author_id);
-CREATE INDEX lot_3 ON lot (winner_id);
-CREATE INDEX lot_4 ON lot (category_id);
-CREATE INDEX rate_1 ON rate (author_id);
-CREATE INDEX rate_2 ON rate (lot_id);
-CREATE INDEX user_1 ON users (name);
-CREATE INDEX user_2 ON users (created_lots_id);
-CREATE INDEX user_3 ON users (rates_id);
+CREATE INDEX uk_lot_title ON lot (title);
+CREATE INDEX ind_lot_author_id ON lot (author_id);
+CREATE INDEX ind_lot_winner_id ON lot (winner_id);
+CREATE INDEX ind_lot_category_id ON lot (category_id);
+CREATE INDEX ind_rate_author_id ON rate (author_id);
+CREATE INDEX ind_rate_lot_id ON rate (lot_id);
+CREATE INDEX uk_user_name ON users (name);

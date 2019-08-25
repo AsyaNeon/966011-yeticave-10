@@ -98,23 +98,10 @@ VALUES (NOW(), 'asya@gmail', 'asya', '12345', 'img/avatar-1.jpg', 'no'),
        (NOW(), 'asya1@gmail', 'asya1', '123456', 'img/avatar-2.jpg', 'yes'),
        (NOW(), 'asya2@gmail', 'asya2', '1234567', 'img/avatar-3.jpg', 'no-no');
 
-INSERT INTO all_lots_user (lot_id, user_id)
-VALUES (1, 1),
-       (2, 3),
-       (3, 1),
-       (4, 2),
-       (5, 1),
-       (6, 3);
-
 INSERT INTO rate (date_create, rate, author_id, lot_id)
 VALUES (NOW(), 11299, 1, 1),
        (NOW(), 5850, 3, 6),
        (NOW(), 6000, 1, 6);
-
-INSERT INTO all_rates_user (rates_id, user_id)
-VALUES (1, 1),
-       (2, 3),
-       (3, 1);
 
 -- покажет все категории
 SELECT title
@@ -124,14 +111,14 @@ FROM categories;
 -- ссылку на изображение, цену, название категории
 SELECT l.title, initial_cost, image, c.title AS category
 FROM lot l
-         INNER JOIN categories c ON l.category_id = c.id
+INNER JOIN categories c ON l.category_id = c.id
 WHERE date_completion > NOW()
 ORDER BY date_create DESC;
 
 -- показать лот по его id. Получите также название категории, к которой принадлежит лот
 SELECT l.title, c.title AS category
 FROM lot l
-         INNER JOIN categories c ON l.category_id = c.id
+INNER JOIN categories c ON l.category_id = c.id
 WHERE l.id = 1;
 
 -- обновить название лота по его идентификатору
@@ -142,8 +129,8 @@ WHERE id = 1;
 -- получить список ставок для лота по его идентификатору с сортировкой по дате
 SELECT l.title, r.date_create, u.name
 FROM rate r
-         INNER JOIN lot l ON r.lot_id = l.id
-         INNER JOIN users u ON r.author_id = u.id
+INNER JOIN lot l ON r.lot_id = l.id
+INNER JOIN users u ON r.author_id = u.id
 WHERE l.id = 1;
 
 
