@@ -45,9 +45,9 @@ CREATE TABLE users
     COMMENT ='пользователи';
 
 CREATE INDEX uk_lot_title ON lot (title);
-CREATE INDEX ind_lot_author_id ON lot (author_id);
-CREATE INDEX ind_lot_winner_id ON lot (winner_id);
-CREATE INDEX ind_lot_category_id ON lot (category_id);
-CREATE INDEX ind_rate_author_id ON rate (author_id);
-CREATE INDEX ind_rate_lot_id ON rate (lot_id);
+CREATE INDEX idx_lot_author_id ON lot (author_id);
+CREATE INDEX idx_lot_winner_id ON lot (winner_id);
+CREATE INDEX idx_lot_category_id ON lot (category_id);
+CREATE INDEX idx_rate_author_id ON rate (author_id);
+CREATE INDEX idx_rate_lot_id ON rate (lot_id);
 CREATE INDEX uk_user_name ON users (name);
