@@ -17,7 +17,7 @@ VALUES (NOW(),
         графика от Шона Кливера еще никого не оставляла равнодушным.',
         'img/lot-1.jpg',
         10999,
-        '2019-08-23',
+        '2019-09-23',
         100,
         1,
         3,
@@ -31,7 +31,7 @@ VALUES (NOW(),
         графика от Шона Кливера еще никого не оставляла равнодушным.',
         'img/lot-2.jpg',
         159999,
-        '2019-08-24',
+        '2019-09-24',
         150,
         3,
         2,
@@ -45,7 +45,7 @@ VALUES (NOW(),
         графика от Шона Кливера еще никого не оставляла равнодушным.',
         'img/lot-3.jpg',
         8000,
-        '2019-08-25',
+        '2019-09-25',
         100,
         1,
         2,
@@ -59,7 +59,7 @@ VALUES (NOW(),
         графика от Шона Кливера еще никого не оставляла равнодушным.',
         'img/lot-4.jpg',
         10999,
-        '2019-08-26',
+        '2019-09-26',
         100,
         2,
         3,
@@ -73,7 +73,7 @@ VALUES (NOW(),
         графика от Шона Кливера еще никого не оставляла равнодушным.',
         'img/lot-5.jpg',
         7500,
-        '2019-08-27',
+        '2019-09-27',
         100,
         1,
         3,
@@ -87,7 +87,7 @@ VALUES (NOW(),
         графика от Шона Кливера еще никого не оставляла равнодушным.',
         'img/lot-6.jpg',
         5400,
-        '2019-08-28',
+        '2019-09-28',
         150,
         3,
         1,
@@ -103,36 +103,37 @@ VALUES (NOW(), 11299, 1, 1),
        (NOW(), 5850, 3, 6),
        (NOW(), 6000, 1, 6);
 
--- покажет все категории
-SELECT title
-FROM categories;
-
--- покажет самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену,
--- ссылку на изображение, цену, название категории
-SELECT l.title, initial_cost, image, c.title AS category
-FROM lot l
-INNER JOIN categories c ON l.category_id = c.id
-WHERE date_completion > NOW()
-ORDER BY date_create DESC;
-
--- показать лот по его id. Получите также название категории, к которой принадлежит лот
-SELECT l.title, c.title AS category
-FROM lot l
-INNER JOIN categories c ON l.category_id = c.id
-WHERE l.id = 1;
-
--- обновить название лота по его идентификатору
-UPDATE lot
-SET title = ''
-WHERE id = 1;
-
--- получить список ставок для лота по его идентификатору с сортировкой по дате
-SELECT l.title, r.date_create, u.name
-FROM rate r
-INNER JOIN lot l ON r.lot_id = l.id
-INNER JOIN users u ON r.author_id = u.id
-WHERE l.id = 1
-ORDER BY r.date_create DESC;
+# -- покажет все категории
+# SELECT title
+# FROM categories
+# ORDER BY id ASC;
+#
+# -- покажет самые новые, открытые лоты. Каждый лот должен включать название, стартовую цену,
+# -- ссылку на изображение, цену, название категории
+# SELECT l.title, initial_cost, image, c.title AS category, date_completion
+# FROM lot l
+# INNER JOIN categories c ON l.category_id = c.id
+# WHERE date_completion > NOW()
+# ORDER BY date_create DESC;
+#
+# -- показать лот по его id. Получите также название категории, к которой принадлежит лот
+# SELECT l.title, c.title AS category
+# FROM lot l
+# INNER JOIN categories c ON l.category_id = c.id
+# WHERE l.id = 1;
+#
+# -- обновить название лота по его идентификатору
+# UPDATE lot
+# SET title = '2014 Rossignol District Snowboard'
+# WHERE id = 1;
+#
+# -- получить список ставок для лота по его идентификатору с сортировкой по дате
+# SELECT l.title, r.date_create, u.name
+# FROM rate r
+# INNER JOIN lot l ON r.lot_id = l.id
+# INNER JOIN users u ON r.author_id = u.id
+# WHERE l.id = 1
+# ORDER BY r.date_create DESC;
 
 
 

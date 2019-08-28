@@ -55,9 +55,9 @@
             <ul class="nav__list container">
                 <!--заполните этот список из массива категорий-->
 
-                <?php foreach ($product_category as $value): ?>
+                <?php foreach ($categories as $value): ?>
                     <li class="nav__item">
-                        <a href="pages/all-lots.html"><?= esc($value) ?></a>
+                        <a href="pages/all-lots.html"><?= $value['title'] ?></a>
                     </li>
                 <?php endforeach; ?>
 
