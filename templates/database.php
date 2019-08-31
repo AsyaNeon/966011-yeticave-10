@@ -1,8 +1,7 @@
 <?php
 
-return [
-    'host' => 'localhost',
-    'database' => 'yeticave',
-    'user' => 'root',
-    'password' => ''
-];
+define('DBHOST','localhost');
+define('DBNAME','yeticave');
+define('DBUSER','root');
+define('DBPASSWORD','');
+define('DBUTF','utf8');
