@@ -5,9 +5,9 @@
     <ul class="promo__list">
         <!--заполните этот список из массива категорий-->
 
-        <?php foreach ($product_category as $value): ?>
-            <li class="promo__item promo__item--boards">
-                <a class="promo__link" href="pages/all-lots.html"><?= esc($value) ?></a>
+        <?php foreach ($categories as $value): ?>
+            <li class="promo__item promo__item--<?= $value['code'] ?>">
+                <a class="promo__link" href="pages/all-lots.html"><?= $value['title'] ?></a>
             </li>
         <?php endforeach; ?>
 
@@ -20,7 +20,7 @@
     <ul class="lots__list">
         <!--заполните этот список из массива с товарами-->
 
-        <?php foreach ($ads as $value): ?>
+        <?php foreach ($lot as $value): ?>
             <li class="lots__item lot">
                 <div class="lot__image">
                     <img src="<?= esc($value['image']) ?>" width="350" height="260" alt="Изображение товара">
@@ -33,16 +33,16 @@
                     <div class="lot__state">
                         <div class="lot__rate">
                             <span class="lot__amount">Стартовая цена</span>
-                            <span class="lot__cost"><?= shows_cost(esc($value['price'])) ?></span>
+                            <span class="lot__cost"><?= shows_cost(esc($value['initial_cost'])) ?></span>
                         </div>
 
-                        <?php if (get_time_range($value['date_end'])[0] === "00"): ?>
+                        <?php if (get_time_range($value['date_completion'])[0] === "00"): ?>
                             <div class="lot__timer timer timer--finishing">
-                                <?= get_time_range($value['date_end'])[0] . ':' . get_time_range($value['date_end'])[1] ?>
+                                <?= get_time_range($value['date_completion'])[0] . ':' . get_time_range($value['date_completion'])[1] ?>
                             </div>
                         <?php else: ?>
                             <div class="lot__timer timer">
-                                <?= get_time_range($value['date_end'])[0] . ':' . get_time_range($value['date_end'])[1] ?>
+                                <?= get_time_range($value['date_completion'])[0] . ':' . get_time_range($value['date_completion'])[1] ?>
                             </div>
                         <?php endif; ?>
 
