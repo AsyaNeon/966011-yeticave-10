@@ -22,7 +22,7 @@ if (!$link) {
     }
     // запрос на получение самых новых открытых лотов
     $res = mysqli_query($link,
-        'SELECT l.title, initial_cost, image, c.title AS category, date_completion FROM lot l 
+        'SELECT l.id, l.title, initial_cost, image, c.title AS category, date_completion FROM lot l 
         INNER JOIN categories c ON l.category_id = c.id 
         WHERE date_completion > NOW() 
         ORDER BY date_create DESC');
@@ -38,7 +38,7 @@ if (!$link) {
         'lot' => $lot
     ]);
 
-    if (isset($_GET['tab']) && $_GET['tab'] == 'lot') {
+    if (isset($_GET['id'])) {
         $sort_field = 'id';
     }
 
@@ -52,7 +52,7 @@ if (!$link) {
         $lot = mysqli_fetch_all($res, MYSQLI_ASSOC);
         $content = include_template('lot.php', ['categories' => $categories]);
     } else {
-        $content = include_template('layout.php', ['content' => $error]);
+        //$content = include_template('layout.php', ['content' => $error]);
     }
 
 }
