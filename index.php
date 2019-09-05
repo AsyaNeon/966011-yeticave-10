@@ -1,11 +1,11 @@
 <?php
 
-require_once('templates/functions.php');
+require_once 'templates/functions.php';
 require_once 'templates/init.php';
 
 if (!$link) {
     $error = mysqli_connect_error();
-    $content = include_template('templates/layout.php', ['content' => $error]);
+    $content = include_template('layout.php', ['content' => $error]);
 } else {
 
     // Выполняем запрос и получаем результат
@@ -32,14 +32,34 @@ if (!$link) {
     } else {
         $content = include_template('layout.php', ['content' => $error]);
     }
+
+    $content = include_template('main.php', [
+        'categories' => $categories,
+        'lot' => $lot
+    ]);
+
+    if (isset($_GET['tab']) && $_GET['tab'] == 'lot') {
+        $sort_field = 'id';
+    }
+
+    $res = mysqli_query($link,
+        'SELECT l.id, l.title, description, image, initial_cost, date_completion, step_rate, c.title AS category
+        FROM lot l
+        INNER JOIN categories c ON l.category_id = c.id
+        WHERE l.id = $sort_field');
+
+    if ($res) {
+        $lot = mysqli_fetch_all($res, MYSQLI_ASSOC);
+        $content = include_template('lot.php', ['categories' => $categories]);
+    } else {
+        $content = include_template('layout.php', ['content' => $error]);
+    }
+
 }
 
-$page_content = include_template('main.php', [
-    'categories' => $categories,
-    'lot' => $lot
-]);
+
 $layout_content = include_template('layout.php', [
-    'content' => $page_content,
+    'content' => $content,
     'title' => 'Главная',
     'is_auth' => $is_auth,
     'user_name' => $user_name,
