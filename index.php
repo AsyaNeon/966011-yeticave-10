@@ -40,14 +40,24 @@ if (!$link) {
             'SELECT l.id, l.title, description, image, initial_cost, date_completion, step_rate, c.title AS category
             FROM lot l
             INNER JOIN categories c ON l.category_id = c.id
-            WHERE l.id =' . $sort_field);
+            WHERE l.id = ' . $sort_field);
 
         if ($res_1) {
-            $lot = mysqli_fetch_all($res_1, MYSQLI_ASSOC);
-            $content = include_template('lot.php', [
-                'categories' => $categories,
-                'lot' => $lot
-            ]);
+
+            if (!mysqli_num_rows($res_1)) {
+                http_response_code(404);
+                $content = '<section class="lot-item container">
+                                <h2>404 Страница не найдена</h2>
+                                <p>Данной страницы не существует на сайте.</p>
+                            </section>';
+            } else {
+                $lot = mysqli_fetch_array($res_1);
+                $content = include_template('lot.php', [
+                    'categories' => $categories,
+                    'lot' => $lot
+                ]);
+            }
+
         } else {
             $content = mysqli_error($link);
         }
