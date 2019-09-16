@@ -7,7 +7,7 @@ if (!$link) {
     $error = mysqli_connect_error();
     $content = $error;
 } else {
-    $result = mysqli_query($link, 'SELECT title, code FROM categories ORDER BY id ASC');
+    $result = mysqli_query($link, 'SELECT id, title, code FROM categories ORDER BY id ASC');
 
     if ($result) {
         $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
@@ -62,6 +62,11 @@ if (!$link) {
             $content = mysqli_error($link);
         }
     }
+
+    if (isset($_GET['add-lot']) && $_GET['add-lot'] == 'new') {
+        require_once 'templates\add.php';
+    }
+
 }
 
 
